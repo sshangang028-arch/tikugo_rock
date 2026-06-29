@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>逐語力 (ちくごロック) | キャリアコンサルタント技能検定 対策ゲーム</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- Papaparse for reliable CSV Parsing -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- TITLE SCREEN -->
+    <section id="screen-title" class="screen active">
+      <div class="title-logo">
+        <span class="badge">2級キャリアコンサルタント技能士検定対策</span>
+        <h1>逐語力<span>- tikugo rock -</span></h1>
+      </div>
+      
+      <div class="game-description">
+        <p>クライアントの葛藤や語りに向き合い、制限時間<strong>30秒</strong>以内にカウンセラーとしての「最適な応答」を4択から選んでください。</p>
+        <div class="rules-box">
+          <h3>検定準拠・基本ルール</h3>
+          <ul>
+            <li>正解（適切な受容・共感）: <span class="text-success">+5点</span></li>
+            <li>不正解（時間切れ）: <span class="text-danger">-10点</span></li>
+            <li>不正解（NG応答）: <span class="text-danger">-5点</span></li>
+          </ul>
+          <p class="description-small">※間違えた相槌、余計な自分語り、時期尚早な提案、詰問に注意！</p>
+        </div>
+      </div>
+
+      <!-- CSV Loading Options -->
+      <div class="csv-control-box">
+        <h3>問題データのインポート</h3>
+        <p class="description-small">※ローカルで起動している場合は自動インポートされます。スマホやCORSエラー時は、以下から「questions.csv」を選択してください。</p>
+        <div class="file-input-wrapper">
+          <button class="btn-file-select" type="button">CSVファイルを選択</button>
+          <input type="file" id="csv-upload" accept=".csv" />
+          <span id="file-name" class="file-name-text">ファイルが選択されていません</span>
+        </div>
+        <p id="csv-status" class="csv-status-message"></p>
+      </div>
+
+      <div class="title-actions">
+        <button id="btn-start" class="btn btn-primary" disabled>ゲームを開始する</button>
+      </div>
+    </section>
+
+    <!-- GAMEPLAY SCREEN -->
+    <section id="screen-game" class="screen">
+      <!-- Top HUD -->
+      <div class="game-hud">
+        <div class="hud-item progress-block">
+          <span class="hud-label">問題</span>
+          <span class="hud-value"><span id="current-q-num">1</span><span class="hud-sub"> / 10</span></span>
+        </div>
+        <div class="hud-item score-block">
+          <span class="hud-label">現在のスコア</span>
+          <span id="game-score" class="hud-value">0</span>
+        </div>
+      </div>
+
+      <!-- Time Gauge -->
+      <div class="timer-container">
+        <div class="timer-track">
+          <div id="timer-bar" class="timer-fill"></div>
+        </div>
+        <div class="timer-text-container">
+          <span id="timer-text">30.0</span>秒
+        </div>
+      </div>
+
+      <!-- Question Context -->
+      <div class="question-container">
+        <div class="client-meta-card">
+          <span class="client-icon">👤</span>
+          <div class="client-details">
+            <span id="client-info-label">クライアント属性</span>
+            <div id="client-info">相談者情報ロード中...</div>
+          </div>
+        </div>
+        
+        <div class="speech-bubble">
+          <p id="client-speech">相談者の発言ロード中...</p>
+        </div>
+      </div>
+
+      <!-- 4 Options -->
+      <div class="options-container">
+        <div id="options-grid" class="options-grid">
+          <!-- Dynamically populated buttons -->
+          <button class="option-btn" data-index="0"></button>
+          <button class="option-btn" data-index="1"></button>
+          <button class="option-btn" data-index="2"></button>
+          <button class="option-btn" data-index="3"></button>
+        </div>
+      </div>
+
+      <!-- Explanation Panel (Displays after choice) -->
+      <div id="explanation-panel" class="explanation-panel">
+        <div class="explanation-content">
+          <div class="explanation-header">
+            <span id="expl-result-badge" class="result-badge">正解</span>
+            <div class="expl-type-container">
+              <span class="expl-label">応答区分:</span>
+              <span id="expl-response-type">不適切な相槌</span>
+            </div>
+          </div>
+          <div class="explanation-body">
+            <p id="expl-text">解説テキストがここに入ります。</p>
+            <div id="expl-correct-answer" class="correct-answer-box" style="display: none;">
+              <span class="correct-label">正解の応答:</span>
+              <p id="correct-answer-text"></p>
+            </div>
+          </div>
+          <div class="explanation-actions">
+            <button id="btn-next" class="btn btn-gold">続きを解く ➔</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Big O/X Overlay (Quick pop-up) -->
+      <div id="feedback-overlay" class="feedback-overlay">
+        <span id="overlay-mark" class="overlay-mark">〇</span>
+      </div>
+    </section>
+
+    <!-- RESULT SCREEN -->
+    <section id="screen-result" class="screen">
+      <div class="result-illustration">🏆</div>
+      <h2 class="result-title">相談終了</h2>
+
+      <div class="result-card">
+        <div class="result-stats">
+          <div class="result-stat-item">
+            <span class="stat-label">トータルスコア</span>
+            <span id="final-score" class="stat-value">0</span>
+          </div>
+          <div class="result-stat-item">
+            <span class="stat-label">正解率</span>
+            <span id="final-accuracy" class="stat-value">0%</span>
+          </div>
+        </div>
+
+        <div class="result-rank-box">
+          <span class="rank-label">判定段位</span>
+          <div id="result-rank" class="rank-value">キャリア支援者</div>
+          <p id="result-rank-desc" class="rank-desc">お疲れ様でした！実力を磨いてさらに上を目指しましょう。</p>
+        </div>
+      </div>
+
+      <div class="result-actions">
+        <button id="btn-retry" class="btn btn-primary">もう一度挑戦する</button>
+        <button id="btn-to-title" class="btn btn-outline">タイトル画面へ</button>
+      </div>
+    </section>
+  </div>
+  <script src="questions_data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
