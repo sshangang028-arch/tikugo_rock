@@ -134,15 +134,14 @@ h1 span {
 }
 
 .title-actions {
-  position: fixed;
+  position: sticky;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
   width: 100%;
-  max-width: 440px;
-  padding: 16px 20px;
-  background: linear-gradient(to top, var(--bg-color) 70%, transparent);
+  padding: 16px 0;
+  background: linear-gradient(to top, var(--bg-color) 60%, rgba(11, 15, 25, 0.95) 85%, transparent);
   z-index: 5;
+  margin-top: auto;
+  flex-shrink: 0;
 }
 
 .badge {
