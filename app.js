@@ -180,7 +180,7 @@ function switchScreen(newScreen) {
 function loadDefaultCSV() {
   // Prefer JS-injected default data to avoid CORS on file:// protocol
   if (typeof DEFAULT_CSV_DATA !== 'undefined' && DEFAULT_CSV_DATA) {
-    parseCSVData(DEFAULT_CSV_DATA, "デフォルト問題集");
+    parseCSVData(DEFAULT_CSV_DATA.trim(), "デフォルト問題集");
     return;
   }
 
