@@ -794,3 +794,48 @@ h1 span {
   gap: 12px;
   margin-bottom: 20px;
 }
+
+/* Affiliate layout */
+.affiliate-box {
+  width: 100%;
+  margin: 12px 0 16px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.affiliate-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--light-gold);
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.expl-affiliate-link {
+  font-size: 0.8rem;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-sm);
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.expl-affiliate-link .affiliate-label {
+  font-size: 0.7rem;
+  color: var(--light-gold);
+  font-weight: 600;
+}
+
+.expl-affiliate-link a {
+  color: #60a5fa;
+  text-decoration: underline;
+  word-break: break-all;
+}
+
+.expl-affiliate-link a:hover {
+  color: #93c5fd;
+}
