@@ -127,7 +127,7 @@ h1 span {
   justify-content: flex-start;
   overflow-y: auto;
   gap: 12px;
-  padding-bottom: 90px; /* Leave space for absolute start button */
+  padding-bottom: 12px;
 }
 
 .title-logo {
@@ -137,13 +137,14 @@ h1 span {
 }
 
 .title-actions {
-  position: absolute;
+  position: sticky;
   bottom: 0;
-  left: 0;
   width: 100%;
-  padding: 16px 20px;
-  background: linear-gradient(to top, var(--bg-color) 80%, transparent);
+  padding: 16px 0;
+  background: linear-gradient(to top, var(--bg-color) 60%, rgba(11, 15, 25, 0.95) 85%, transparent);
   z-index: 5;
+  margin-top: auto;
+  flex-shrink: 0;
 }
 
 .badge {
