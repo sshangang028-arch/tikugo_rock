@@ -76,6 +76,8 @@ body {
 @media (min-width: 441px) {
   .app-container {
     height: 850px;
+    max-height: 90cvh;
+    max-height: 90dvh;
     border-radius: var(--radius-lg);
     border: 1px solid rgba(255, 255, 255, 0.05);
   }
@@ -840,4 +842,32 @@ h1 span {
 
 .expl-affiliate-link a:hover {
   color: #93c5fd;
+}
+
+/* PC用スクロールバーのカスタマイズ */
+#screen-title, #screen-result {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(217, 119, 6, 0.3) transparent;
+}
+
+#screen-title::-webkit-scrollbar,
+#screen-result::-webkit-scrollbar {
+  width: 6px;
+}
+
+#screen-title::-webkit-scrollbar-track,
+#screen-result::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#screen-title::-webkit-scrollbar-thumb,
+#screen-result::-webkit-scrollbar-thumb {
+  background: rgba(217, 119, 6, 0.3);
+  border-radius: 999px;
+  transition: background 0.2s ease;
+}
+
+#screen-title::-webkit-scrollbar-thumb:hover,
+#screen-result::-webkit-scrollbar-thumb:hover {
+  background: rgba(217, 119, 6, 0.6);
 }
