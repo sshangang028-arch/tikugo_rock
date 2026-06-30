@@ -697,8 +697,10 @@ h1 span {
 
 /* RESULT SCREEN */
 #screen-result {
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
+  overflow-y: auto;
+  gap: 16px;
 }
 
 .result-illustration {
