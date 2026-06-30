@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>逐語力 (ちくごロック) | キャリアコンサルタント技能検定 対策ゲーム</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <!-- Papaparse for reliable CSV Parsing -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 </head>
+
 <body>
   <div class="app-container">
     <!-- TITLE SCREEN -->
     <section id="screen-title" class="screen active">
       <div class="title-logo">
         <span class="badge">2級キャリアコンサルタント技能士検定対策</span>
-        <h1>逐語力<span>- tikugo rock -</span></h1>
+        <h1>逐語禄<span>- tikugo rock -</span></h1>
       </div>
-      
+
       <div class="game-description">
         <p>クライアントの葛藤や語りに向き合い、制限時間<strong>30秒</strong>以内にカウンセラーとしての「最適な応答」を4択から選んでください。</p>
         <div class="rules-box">
@@ -30,7 +35,8 @@
             <li>不正解（NG応答）: <span class="text-danger">-5点</span></li>
           </ul>
           <p class="description-small">※間違えた相槌、余計な自分語り、時期尚早な提案、詰問に注意！</p>
-          <p class="description-small" style="margin-top: 8px; color: #fbbf24; font-weight: 600;">🎯 合格ライン: 25点以上（全10問）</p>
+          <p class="description-small" style="margin-top: 8px; color: #fbbf24; font-weight: 600;">🎯 合格ライン: 25点以上（全10問）
+          </p>
         </div>
       </div>
 
@@ -39,7 +45,8 @@
         <h3>問題データのインポート</h3>
         <p class="description-small">オリジナルの問題を登録したい人は、以下からCSVをダウンロードして、Excelなどで修正してください。</p>
         <div style="text-align: center; margin: 8px 0;">
-          <a href="questions_template.csv" download="questions_template.csv" class="download-link">📥 csvテンプレートをダウンロード</a>
+          <a href="questions_template.csv" download="questions_template.csv" class="download-link">📥
+            csvテンプレートをダウンロード</a>
         </div>
         <div class="file-input-wrapper">
           <button class="btn-file-select" type="button">CSVファイルを選択</button>
@@ -87,7 +94,7 @@
             <div id="client-info">相談者情報ロード中...</div>
           </div>
         </div>
-        
+
         <div class="speech-bubble">
           <p id="client-speech">相談者の発言ロード中...</p>
         </div>
@@ -123,7 +130,8 @@
           </div>
           <div class="expl-affiliate-link">
             <span class="affiliate-label">📖 おすすめ教材:</span>
-            <a href="https://hb.afl.rakuten.co.jp/ichiba/0e3db4a4.5e7e5970.0e3db4a5.31980c11/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F12132888%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjEyOHgxMjgiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MSwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9" target="_blank" rel="nofollow sponsored noopener">プロカウンセラーが教えるはじめての傾聴術 [ 古宮昇 ]</a>
+            <a href="https://hb.afl.rakuten.co.jp/ichiba/0e3db4a4.5e7e5970.0e3db4a5.31980c11/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F12132888%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjEyOHgxMjgiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MSwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9"
+              target="_blank" rel="nofollow sponsored noopener">プロカウンセラーが教えるはじめての傾聴術 [ 古宮昇 ]</a>
           </div>
           <div class="explanation-actions">
             <button id="btn-next" class="btn btn-gold">続きを解く ➔</button>
@@ -173,4 +181,5 @@
   <script src="questions_data.js"></script>
   <script src="app.js"></script>
 </body>
+
 </html>
